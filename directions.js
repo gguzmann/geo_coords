@@ -1,7 +1,7 @@
 const directions = [
-    'Plaza Baquedano',
-    'Pío Nono 150, Recoleta, Región Metropolitana',
-    'San Pablo 6750'
+    'Pasaje jacaranda casa 1',
+    'Uno sur 676',
+    'sur senda 20'
 ]
 
 module.exports = {directions}

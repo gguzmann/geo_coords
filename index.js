@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer');
+const fs = require('fs')
 const { directions } = require('./directions');
 
 const geo = async () => {
@@ -16,7 +17,7 @@ const geo = async () => {
         console.log('tipear direccion', dir)
         await input.type(dir)
         await page.click('#searchbox-searchbutton');
-        
+
         console.log('Esperar 5 seg')
         await page.waitForTimeout(5000);
         const url = await page.url().split('@');
@@ -24,6 +25,15 @@ const geo = async () => {
             x: url[1].split('/')[0].split(',')[0],
             y: url[1].split('/')[0].split(',')[1]
         };
+
+        fs.appendFileSync('./test.csv', `${dir},${coord.x},${coord.y}`+'\n', (err) => {
+            if(err) {
+                console.error("error", err)
+            } else {
+                console.log("exito")
+            }
+        })
+
         console.log(`Coordenadas para "${dir}": x=${coord.x}, y=${coord.y}`);
 
         await page.close();
