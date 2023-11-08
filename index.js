@@ -1,17 +1,11 @@
 const puppeteer = require('puppeteer');
+const { directions } = require('./directions');
 
-
-const directions = [
-    'Plaza Baquedano',
-    'Pío Nono 150, Recoleta, Región Metropolitana',
-    'San Pablo 6750'
-    ]
 const geo = async () => {
-    const browser = await puppeteer.launch({ headless: false});
+    const browser = await puppeteer.launch({ headless: true});
     for (const dir of directions) {
         const page = await browser.newPage();
         await page.goto('https://www.google.cl/maps/preview');
-        // await page.$eval('#searchboxinput', (el, dir) => el.value = direction);
         const input = await page.$('#searchboxinput')
         await input.type(dir)
 
